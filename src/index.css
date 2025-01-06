@@ -1,13 +1,52 @@
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h1 {
+  font-size: 45px;
+  color: #333;
+}
+
+header {
+  text-align: center;
+  padding: 4px 10%;
+  margin-bottom: 50px;
+  background-color: #ccc;
+}
+
+.app {
+  background-image: url(../src/images/mountain.jpg);
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.tastCard {
+  width: 250px;
+  padding: 10px 25px;
+  margin: 10px 1%;
+  background: #ddd;
+}
+
+.taskCardTitleInputArea {
+  margin-bottom: 10px;
+  width: 30%;
+  cursor: pointer;
+}
+
+.taskCardTitleInput {
+  width: 80px;
+  font-size: 1.1rem;
+  padding: 4px 6px;
+  border-radius: 3px;
+  border: none;
+}
+
+.taskAddInput {
+  width: 100%;
+  font-size: 1,3rem;
+  padding: 10px 15px;
+  border-radius: 3px;
+  border: none;
 }
