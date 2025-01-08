@@ -1,17 +1,78 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
-    font-size: 45px;
-    color: #333;
+  font-size: 45px;
+  color: #333;
+  font-weight: 600;
+  text-shadow: 2px 2px 2px #000;
 }
 
 header {
-    text-align: center;
-    padding: 4px 10%;
-    margin-bottom: 50px;
-    background-color: #ccc;
+  text-align: center;
+  padding: 4px 10%;
+  margin-bottom: 50px;
+  background-color: #ccc;
+}
+
+.app {
+  background-image: url(../src/images/mountain.jpg);
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.taskCard {
+  width: 250px;
+  padding: 10px 25px;
+  margin: 10px 1%;
+  background-color: #ddd;
+  border-radius: 5px;
+}
+
+.taskCardInputArea {
+  margin-bottom: 10px;
+  width: 30%;
+  cursor: pointer;
+}
+
+.taskCardTitleInput {
+  width: 80px;
+  font-size: 1.1rem;
+  padding: 4px 6px;
+  border-radius: 3px;
+  border: none;
+  outline: none;
+}
+
+.taskAddInput {
+  width: 100%;
+  font-size: 1.3rem;
+  padding: 10px 15px;
+  border-radius: 3px;
+  border: none;
+  outline: none;
+}
+
+.taskBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 17px 0;
+  margin-top: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px 1px rgb(75, 75, 75);
+}
+
+.taskText {
+  margin-left: 12px;
+}
+
+.taskTrashButton {
+  cursor: pointer;
+  margin-right: 9px;
+  border: none;
 }
