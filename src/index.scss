@@ -1,6 +1,5 @@
 * {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
@@ -58,21 +57,14 @@ header {
 }
 
 .taskBox {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: space-between;
+  align-items: center;
   padding: 17px 0;
   margin-top: 10px;
   background-color: #fff;
   border-radius: 5px;
-  -webkit-box-shadow: 1px 1px 1px 1px #4b4b4b;
-          box-shadow: 1px 1px 1px 1px #4b4b4b;
+  box-shadow: 1px 1px 1px 1px rgb(75, 75, 75);
 }
 
 .taskText {
@@ -84,4 +76,3 @@ header {
   margin-right: 9px;
   border: none;
 }
-/*# sourceMappingURL=index.css.map */
