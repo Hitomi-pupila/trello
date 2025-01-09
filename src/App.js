@@ -1,17 +1,11 @@
-import { DndContext } from '@dnd-kit/core';
-import { Droppable } from './Droppable';
-import { Draggable } from './Draggable';
+import { Header } from "./compornents/header/Header";
+import { TaskCards } from "./compornents/task/TaskCards";
 
 function App() {
   return (
-    <div>
-      <DndContext>
-        <Droppable id="droppable">
-          <Draggable id="draggable">
-            Go ahead, drag me.
-          </Draggable>
-        </Droppable>
-      </DndContext>
+    <div className="app">
+      <Header />
+      <TaskCards />
     </div>
   );
 }
