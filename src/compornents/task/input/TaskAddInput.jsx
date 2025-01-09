@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export const TaskAddInput = ({
   inputText,
@@ -17,7 +18,7 @@ export const TaskAddInput = ({
     setTaskList([
       ...taskList,
       {
-        id: taskList.length,
+        id: uuidv4(),
         text: inputText,
       },
     ]);
