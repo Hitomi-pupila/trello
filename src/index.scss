@@ -20,14 +20,16 @@ h1 {
 
 header {
   text-align: center;
-  padding: 4px 10%;
-  margin-bottom: 50px;
 }
 
 .l-header {
-  display: flex;
-  gap: 20px;
-  align-items: center;
+  @media screen and (min-width: 769px) {
+    padding: 4px 10%;
+    margin-bottom: 50px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
 }
 
 .app {
