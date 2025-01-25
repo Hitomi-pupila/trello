@@ -3,57 +3,102 @@ import React, { useState, useEffect } from "react";
 export const TaskCardTitle = ({ cardId }) => {
   const [isClick, setIsClick] = useState(false);
   const [inputCardTitle, setInputCardTitle] = useState("");
+  const [dueDate, setDueDate] = useState("");
+  const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
 
-  // 初期タイトルをlocalStorageから読み込む
+  // 初期タイトルと日付をlocalStorageから読み込む
   useEffect(() => {
     const savedTitle = localStorage.getItem(`title-${cardId}`);
+    const savedDueDate = localStorage.getItem(`dueDate-${cardId}`);
     if (savedTitle) {
       setInputCardTitle(savedTitle);
     } else {
       setInputCardTitle("New Card"); // デフォルトタイトル
     }
+    if (savedDueDate) {
+      setDueDate(savedDueDate);
+    }
   }, [cardId]);
 
-  // タイトル変更時にlocalStorageに保存
-  const handleSaveTitle = (title) => {
-    localStorage.setItem(`title-${cardId}`, title);
+  // タイトルと日付変更時にlocalStorageに保存
+  const handleSave = () => {
+    localStorage.setItem(`title-${cardId}`, inputCardTitle);
+    localStorage.setItem(`dueDate-${cardId}`, dueDate);
   };
 
-  const handleClick = () => {
+  const handleTitleClick = () => {
     setIsClick(true);
   };
 
-  const handleChange = (e) => {
+  const handleTitleChange = (e) => {
     setInputCardTitle(e.target.value);
+  };
+
+  const handleDateChange = (e) => {
+    setDueDate(e.target.value);
+    handleSave(); // 日付変更時に保存
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleSaveTitle(inputCardTitle);
+    handleSave();
     setIsClick(false);
   };
 
   const handleBlur = () => {
-    handleSaveTitle(inputCardTitle);
+    handleSave();
     setIsClick(false);
   };
 
+  // 現在の日時と選択された日付を比較
+  const isOverdue = dueDate && new Date(dueDate) < new Date();
+
+  // 日付選択の表示/非表示を切り替え
+  const toggleDatePicker = () => {
+    setIsDatePickerVisible(!isDatePickerVisible);
+  };
+
   return (
-    <div onClick={handleClick} className="taskCardTitleInputArea">
+    <div className="taskCardTitleInputArea">
       {isClick ? (
         <form onSubmit={handleSubmit}>
           <input
             className="taskCardTitleInput"
             autoFocus
             type="text"
-            onChange={handleChange}
+            onChange={handleTitleChange}
             onBlur={handleBlur}
             value={inputCardTitle}
             maxLength="10"
           />
         </form>
       ) : (
-        <h3>{inputCardTitle}</h3>
+        <div onClick={handleTitleClick}>
+          <h3 style={{ color: isOverdue ? "red" : "black" }}>
+            {inputCardTitle}
+          </h3>
+        </div>
+      )}
+
+      {/* 日付選択ボタン */}
+      <button type="button" onClick={toggleDatePicker}>
+        {isDatePickerVisible ? "変更" : "日付設定"}
+      </button>
+
+      {/* 日付選択フィールド */}
+      {isDatePickerVisible && (
+        <input
+          className="dueDateInput"
+          type="date"
+          value={dueDate}
+          onChange={handleDateChange}
+        />
+      )}
+
+      {dueDate && (
+        <p className={isOverdue ? "red" : ""}>
+          期限: {new Date(dueDate).toLocaleDateString()}
+        </p>
       )}
     </div>
   );

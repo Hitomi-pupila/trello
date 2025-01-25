@@ -142,3 +142,74 @@ header {
   outline: none;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
 }
+
+/* タスクカード全体 */
+.taskCardTitleInputArea {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+/* タイトル部分 */
+.taskCardTitleInputArea h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* タイトル編集時 */
+.taskCardTitleInputArea .taskCardTitleInput {
+  padding: 8px;
+  font-size: 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  margin-top: 5px;
+  box-sizing: border-box;
+}
+
+/* 日付選択ボタン */
+button[type="button"] {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  margin-top: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type="button"]:hover {
+  background-color: #45a049;
+}
+
+/* 日付入力フィールド */
+.dueDateInput {
+  margin-top: 10px;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 選択された日付表示部分 */
+p {
+  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+p.red {
+  color: red;
+}
