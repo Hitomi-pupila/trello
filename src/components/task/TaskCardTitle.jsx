@@ -50,6 +50,12 @@ export const TaskCardTitle = ({ cardId }) => {
     setIsClick(false);
   };
 
+  // 日付リセット
+  const handleResetDate = () => {
+    setDueDate(""); // 日付をリセット
+    localStorage.removeItem(`dueDate-${cardId}`); // localStorageからも削除
+  };
+
   // 現在の日時と選択された日付を比較
   const isOverdue = dueDate && new Date(dueDate) < new Date();
 
@@ -80,8 +86,18 @@ export const TaskCardTitle = ({ cardId }) => {
         </div>
       )}
 
+      {dueDate && (
+        <p className={isOverdue ? "red" : ""}>
+          期限: {new Date(dueDate).toLocaleDateString()}
+        </p>
+      )}
+
       {/* 日付選択ボタン */}
-      <button type="button" onClick={toggleDatePicker}>
+      <button
+        type="button"
+        className="dateButton"
+        onClick={toggleDatePicker}
+      >
         {isDatePickerVisible ? "変更" : "日付設定"}
       </button>
 
@@ -95,10 +111,15 @@ export const TaskCardTitle = ({ cardId }) => {
         />
       )}
 
+      {/* 日付リセットボタン */}
       {dueDate && (
-        <p className={isOverdue ? "red" : ""}>
-          期限: {new Date(dueDate).toLocaleDateString()}
-        </p>
+        <button
+          type="button"
+          onClick={handleResetDate}
+          className="resetButton"
+        >
+          リセット
+        </button>
       )}
     </div>
   );

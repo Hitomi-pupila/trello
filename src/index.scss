@@ -21,7 +21,7 @@ header {
 .app {
   background-image: url(../src/images/mountain.jpg);
   background-repeat: no-repeat;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .taskCard {
@@ -115,6 +115,7 @@ header {
   cursor: pointer;
   font-size: 16px;
   color: rgb(158, 46, 46);
+  margin-left: 10px;
 }
 
 /* リセットボタンの基本スタイル */
@@ -153,6 +154,8 @@ header {
   background-color: #f9f9f9;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 15px;
+  width: -webkit-fill-available;
+  row-gap: 10px;
 }
 
 /* タイトル部分 */
@@ -175,26 +178,9 @@ header {
   box-sizing: border-box;
 }
 
-/* 日付選択ボタン */
-button[type="button"] {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  margin-top: 10px;
-  font-size: 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-button[type="button"]:hover {
-  background-color: #45a049;
-}
-
 /* 日付入力フィールド */
 .dueDateInput {
-  margin-top: 10px;
+  margin-bottom: 20px;
   padding: 8px;
   font-size: 1rem;
   border: 1px solid #ccc;
@@ -212,4 +198,53 @@ p {
 
 p.red {
   color: red;
+}
+
+/* 日付設定ボタン */
+.dateButton {
+  background-color: #4CAF50;  /* 緑色 */
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dateButton:hover {
+  background-color: #45a049;  /* 緑色（ホバー時） */
+}
+
+/* 変更ボタン */
+.changeButton {
+  background-color: #2196F3;  /* 青色 */
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.changeButton:hover {
+  background-color: #1976D2;  /* 青色（ホバー時） */
+}
+
+/* リセットボタン */
+.resetButton {
+  background-color: #FF6F61;  /* 優しい赤（コーラルレッド） */
+  border: 2px solid #FF6F61;
+  color: white;
+  padding: 8px 15px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.resetButton:hover {
+  background-color: #FF5A47;  /* 少し濃い目の赤 */
+  border-color: #FF5A47;
 }
