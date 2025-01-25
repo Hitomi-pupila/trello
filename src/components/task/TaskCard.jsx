@@ -38,7 +38,8 @@ export const TaskCard = ({
             className="taskCardTitleAndTaskCardDeleteButtonArea"
             {...provided.dragHandleProps}
           >
-            <TaskCardTitle />
+            {/* cardIdを渡す */}
+            <TaskCardTitle cardId={taskCard.id} />
             <TaskCardDeleteButton
               taskCardsList={taskCardsList}
               setTaskCardsList={setTaskCardsList}
