@@ -46,7 +46,7 @@ export const Task = ({ task, taskList, setTaskList, index }) => {
                 value={newText}
                 onChange={(e) => setNewText(e.target.value)}
                 onKeyDown={handleKeyDown} // エンターキーを監視
-                aria-label="タスクの内容を編集"
+                title="タスクの内容を編集"
                 className="taskEditInput"
               />
               <button

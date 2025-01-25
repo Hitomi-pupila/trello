@@ -92,21 +92,37 @@ export const TaskCardTitle = ({ cardId }) => {
         </p>
       )}
 
+      <div className="dateButtonFlex">
       {/* 日付選択ボタン */}
-      <button
-        type="button"
-        className="dateButton"
-        onClick={toggleDatePicker}
-      >
-        {isDatePickerVisible ?          
-          <>
-            変更<i className="fas fa-calendar-check"></i>
-          </> : 
-          <>
-            日付設定<i class="fas fa-calendar-alt"></i>
-          </>
-        }
-      </button>
+        <button
+          type="button"
+          className="dateButton"
+          onClick={toggleDatePicker}
+          aria-label={isDatePickerVisible ? "変更" : "日付設定"} // ここでaria-labelを動的に設定
+        >
+          {isDatePickerVisible ? (
+            <>
+              <i className="fas fa-calendar-check"></i>
+            </>
+          ) : (
+            <>
+              <i className="fas fa-calendar-alt"></i>
+            </>
+          )}
+        </button>
+
+        {/* 日付リセットボタン */}
+        {dueDate && (
+          <button
+            type="button"
+            onClick={handleResetDate}
+            className="resetButton"
+            aria-label="リセット"
+          >
+            <i class="fas fa-calendar-times"></i>
+          </button>
+        )}
+      </div>
 
       {/* 日付選択フィールド */}
       {isDatePickerVisible && (
@@ -115,18 +131,8 @@ export const TaskCardTitle = ({ cardId }) => {
           type="date"
           value={dueDate}
           onChange={handleDateChange}
+          title="日付選択"
         />
-      )}
-
-      {/* 日付リセットボタン */}
-      {dueDate && (
-        <button
-          type="button"
-          onClick={handleResetDate}
-          className="resetButton"
-        >
-          リセット<i class="fas fa-calendar-times"></i>
-        </button>
       )}
     </div>
   );

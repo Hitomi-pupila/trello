@@ -22,6 +22,11 @@ header {
   background-color: #ccc;
 }
 
+.l-header {
+  display: flex;
+  gap: 20px;
+}
+
 .app {
   background-image: url(../src/images/mountain.jpg);
   background-repeat: no-repeat;
@@ -194,7 +199,6 @@ header {
 
 /* 日付入力フィールド */
 .dueDateInput {
-  margin-bottom: 20px;
   padding: 8px;
   font-size: 14px;
   border: 1px solid #ccc;
@@ -216,12 +220,13 @@ header {
 .dateButton {
   background-color: #4CAF50;  /* 緑色 */
   color: white;
-  border: none;
+  border: 2px solid #4CAF50;
   padding: 8px 15px;
   font-size: 14px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
+  flex: 1;
 }
 
 .dateButton:hover {
@@ -254,6 +259,7 @@ header {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
+  flex: 1;
 }
 
 .resetButton:hover {
@@ -261,6 +267,30 @@ header {
   border-color: #FF5A47;
 }
 
-.fas {
+.fa-sync-alt,
+.fa-trash-alt,
+.fa-pen {
   margin-left: 5px;
+}
+
+@keyframes colorChange {
+  0% {
+    color: #fff;
+  }
+  50% {
+    color: #67b369; /* 警告色に変わる */
+  }
+  100% {
+    color: #fff; /* 元に戻る */
+  }
+}
+
+.fas.fa-calendar-check {
+  animation: colorChange 3s ease-in-out infinite; /* 無限に色を変化させる */
+  cursor: pointer;
+}
+
+.dateButtonFlex {
+  display: flex;
+  gap: 10px;
 }
