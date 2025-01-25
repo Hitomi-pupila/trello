@@ -77,7 +77,14 @@ header {
   margin-left: 12px;
 }
 
-.taskTrashButton {
+.taskEditInput {
+  width: 150px;
+  margin-left: 10px;
+}
+
+.taskTrashButton,
+.taskEditButton,
+.taskSaveButton {
   cursor: pointer;
   margin-right: 9px;
   border: none;

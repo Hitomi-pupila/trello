@@ -1,22 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { Task } from "./Task";
 
 const reorder = (taskList, startIndex, endIndex) => {
-  //タスクを並び変える。
-  const remove = taskList.splice(startIndex, 1); //[2,3]
-  taskList.splice(endIndex, 0, remove[0]); //[2,1,3]
+  const remove = taskList.splice(startIndex, 1);
+  taskList.splice(endIndex, 0, remove[0]);
 };
 
 export const Tasks = ({ taskList, setTaskList }) => {
-  const handleDrangEnd = (result) => {
-    reorder(taskList, result.source.index, result.destination.index);
+  useEffect(() => {
+    // ローカルストレージからタスクを読み込む
+    const savedTasks = JSON.parse(localStorage.getItem("taskList"));
+    if (savedTasks) {
+      setTaskList(savedTasks);
+    }
+  }, [setTaskList]);
 
-    setTaskList(taskList);
+  const handleDragEnd = (result) => {
+    reorder(taskList, result.source.index, result.destination.index);
+    setTaskList([...taskList]);
+    localStorage.setItem("taskList", JSON.stringify(taskList)); // ドラッグ後にローカルストレージに保存
   };
+
   return (
     <div>
-      <DragDropContext onDragEnd={handleDrangEnd}>
+      <DragDropContext onDragEnd={handleDragEnd}>
         <Droppable droppableId="droppable">
           {(provided) => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
