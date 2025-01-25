@@ -46,7 +46,15 @@ export const TaskCardTitle = ({ cardId }) => {
 
   const toggleDatePicker = () => setIsDatePickerVisible(!isDatePickerVisible);
 
-  const isOverdue = dueDate && new Date(dueDate) < new Date();
+  // 今日の日付を取得し、時刻情報をクリア
+  const getToday = () => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // 時刻情報をクリアして比較
+    return today;
+  };
+
+  // 現在の日時と選択された日付を比較（期限切れは翌日以降のみ）
+  const isOverdue = dueDate && new Date(dueDate) < getToday();
 
   return (
     <div className="taskCardTitleInputArea">
