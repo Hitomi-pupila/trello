@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+body {
+  overflow-wrap: anywhere;
+}
+
 h1 {
   font-size: 45px;
   color: #333;
@@ -65,6 +69,8 @@ header {
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 1px 1px 1px 1px rgb(75, 75, 75);
+  width: fit-content;
+  min-width: 200px;
 }
 
 .taskText {
@@ -75,6 +81,7 @@ header {
   cursor: pointer;
   margin-right: 9px;
   border: none;
+  background-color: transparent;
 }
 
 .taskCardsArea {
@@ -182,22 +189,20 @@ header {
 .dueDateInput {
   margin-bottom: 20px;
   padding: 8px;
-  font-size: 1rem;
+  font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 100%;
   box-sizing: border-box;
 }
 
-/* 選択された日付表示部分 */
-p {
-  margin-top: 10px;
-  font-size: 1rem;
-  font-weight: 500;
+.dueDate {
+  font-size: 12px;
 }
 
-p.red {
+.dueDateOver {
   color: red;
+  font-size: 14px;
 }
 
 /* 日付設定ボタン */
@@ -206,7 +211,7 @@ p.red {
   color: white;
   border: none;
   padding: 8px 15px;
-  font-size: 1rem;
+  font-size: 14px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -238,7 +243,7 @@ p.red {
   border: 2px solid #FF6F61;
   color: white;
   padding: 8px 15px;
-  font-size: 1rem;
+  font-size: 14px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -247,4 +252,8 @@ p.red {
 .resetButton:hover {
   background-color: #FF5A47;  /* 少し濃い目の赤 */
   border-color: #FF5A47;
+}
+
+.fas {
+  margin-left: 5px;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { TaskCard } from "./TaskCard";
 import { AddTaskCardButton } from "./button/AddTaskCardButton";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
@@ -12,32 +12,18 @@ const reorder = (list, startIndex, endIndex) => {
 };
 
 export const TaskCards = () => {
-  const [taskCardsList, setTaskCardsList] = useState([]);
-
-  // コンポーネントの初回レンダリング時に localStorage からデータを読み込む
-  useEffect(() => {
-    const savedData = localStorage.getItem("taskCardsList");
-    if (savedData) {
-      setTaskCardsList(JSON.parse(savedData));
-    } else {
-      // 初期データを設定（必要なら変更）
-      setTaskCardsList([
-        {
-          id: "0",
-          draggableId: "item0",
-        },
-      ]);
-    }
-  }, []);
-
-  // taskCardsList が変更されるたびに localStorage に保存
-  useEffect(() => {
-    localStorage.setItem("taskCardsList", JSON.stringify(taskCardsList));
-  }, [taskCardsList]);
+  const [taskCardsList, setTaskCardsList] = useState([
+    {
+      id: "0",
+      draggableId: "item0",
+    },
+  ]);
 
   const handleDragEnd = (result) => {
+    // ドラッグ先が無効な場合（例: ドロップ先が存在しない）
     if (!result.destination) return;
 
+    // 並び替えを行い、新しい配列を状態に設定
     const reorderedList = reorder(
       taskCardsList,
       result.source.index,

@@ -11,7 +11,7 @@ function App() {
     <div className="app">
       <Header />
       <button onClick={resetLocalStorage} className="reset-button">
-        リセット
+        全てリセット<i class="fas fa-sync-alt"></i>
       </button>
       <TaskCards />
     </div>

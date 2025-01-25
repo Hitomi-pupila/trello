@@ -87,7 +87,7 @@ export const TaskCardTitle = ({ cardId }) => {
       )}
 
       {dueDate && (
-        <p className={isOverdue ? "red" : ""}>
+        <p className={isOverdue ? "dueDateOver" : "dueDate"}>
           期限: {new Date(dueDate).toLocaleDateString()}
         </p>
       )}
@@ -98,7 +98,14 @@ export const TaskCardTitle = ({ cardId }) => {
         className="dateButton"
         onClick={toggleDatePicker}
       >
-        {isDatePickerVisible ? "変更" : "日付設定"}
+        {isDatePickerVisible ?          
+          <>
+            変更<i className="fas fa-calendar-check"></i>
+          </> : 
+          <>
+            日付設定<i class="fas fa-calendar-alt"></i>
+          </>
+        }
       </button>
 
       {/* 日付選択フィールド */}
@@ -118,7 +125,7 @@ export const TaskCardTitle = ({ cardId }) => {
           onClick={handleResetDate}
           className="resetButton"
         >
-          リセット
+          リセット<i class="fas fa-calendar-times"></i>
         </button>
       )}
     </div>
