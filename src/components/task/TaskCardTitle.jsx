@@ -10,59 +10,43 @@ export const TaskCardTitle = ({ cardId }) => {
   useEffect(() => {
     const savedTitle = localStorage.getItem(`title-${cardId}`);
     const savedDueDate = localStorage.getItem(`dueDate-${cardId}`);
-    if (savedTitle) {
-      setInputCardTitle(savedTitle);
-    } else {
-      setInputCardTitle("New Card"); // デフォルトタイトル
-    }
-    if (savedDueDate) {
-      setDueDate(savedDueDate);
-    }
+    setInputCardTitle(savedTitle || "New Card"); // デフォルトタイトル
+    setDueDate(savedDueDate || ""); // 保存されていない場合は空文字列
   }, [cardId]);
 
-  // タイトルと日付変更時にlocalStorageに保存
-  const handleSave = () => {
+  // タイトル変更時にlocalStorageに保存
+  useEffect(() => {
     localStorage.setItem(`title-${cardId}`, inputCardTitle);
-    localStorage.setItem(`dueDate-${cardId}`, dueDate);
-  };
+  }, [inputCardTitle, cardId]);
 
-  const handleTitleClick = () => {
-    setIsClick(true);
-  };
+  // 日付変更時にlocalStorageに保存
+  useEffect(() => {
+    if (dueDate) {
+      localStorage.setItem(`dueDate-${cardId}`, dueDate);
+    }
+  }, [dueDate, cardId]);
 
-  const handleTitleChange = (e) => {
-    setInputCardTitle(e.target.value);
-  };
+  const handleTitleClick = () => setIsClick(true);
 
-  const handleDateChange = (e) => {
-    setDueDate(e.target.value);
-    handleSave(); // 日付変更時に保存
-  };
+  const handleTitleChange = (e) => setInputCardTitle(e.target.value);
+
+  const handleDateChange = (e) => setDueDate(e.target.value);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleSave();
     setIsClick(false);
   };
 
-  const handleBlur = () => {
-    handleSave();
-    setIsClick(false);
-  };
+  const handleBlur = () => setIsClick(false);
 
-  // 日付リセット
   const handleResetDate = () => {
-    setDueDate(""); // 日付をリセット
-    localStorage.removeItem(`dueDate-${cardId}`); // localStorageからも削除
+    setDueDate("");
+    localStorage.removeItem(`dueDate-${cardId}`);
   };
 
-  // 現在の日時と選択された日付を比較
+  const toggleDatePicker = () => setIsDatePickerVisible(!isDatePickerVisible);
+
   const isOverdue = dueDate && new Date(dueDate) < new Date();
-
-  // 日付選択の表示/非表示を切り替え
-  const toggleDatePicker = () => {
-    setIsDatePickerVisible(!isDatePickerVisible);
-  };
 
   return (
     <div className="taskCardTitleInputArea">
@@ -93,25 +77,19 @@ export const TaskCardTitle = ({ cardId }) => {
       )}
 
       <div className="dateButtonFlex">
-      {/* 日付選択ボタン */}
         <button
           type="button"
           className="dateButton"
           onClick={toggleDatePicker}
-          aria-label={isDatePickerVisible ? "変更" : "日付設定"} // ここでaria-labelを動的に設定
+          aria-label={isDatePickerVisible ? "変更" : "日付設定"}
         >
           {isDatePickerVisible ? (
-            <>
-              <i className="fas fa-calendar-check"></i>
-            </>
+            <i className="fas fa-calendar-check"></i>
           ) : (
-            <>
-              <i className="fas fa-calendar-alt"></i>
-            </>
+            <i className="fas fa-calendar-alt"></i>
           )}
         </button>
 
-        {/* 日付リセットボタン */}
         {dueDate && (
           <button
             type="button"
@@ -119,12 +97,11 @@ export const TaskCardTitle = ({ cardId }) => {
             className="resetButton"
             aria-label="リセット"
           >
-            <i class="fas fa-calendar-times"></i>
+            <i className="fas fa-calendar-times"></i>
           </button>
         )}
       </div>
 
-      {/* 日付選択フィールド */}
       {isDatePickerVisible && (
         <input
           className="dueDateInput"
