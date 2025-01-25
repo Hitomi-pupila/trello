@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TaskCardTitle } from "./TaskCardTitle";
 import { TaskCardDeleteButton } from "./button/TaskCardDeleteButton";
 import { TaskAddInput } from "./input/TaskAddInput";
@@ -13,6 +13,19 @@ export const TaskCard = ({
 }) => {
   const [inputText, setInputText] = useState("");
   const [taskList, setTaskList] = useState([]);
+
+  // カードごとのタスクを保存・復元
+  useEffect(() => {
+    const savedTasks = localStorage.getItem(`tasks-${taskCard.id}`);
+    if (savedTasks) {
+      setTaskList(JSON.parse(savedTasks));
+    }
+  }, [taskCard.id]);
+
+  useEffect(() => {
+    localStorage.setItem(`tasks-${taskCard.id}`, JSON.stringify(taskList));
+  }, [taskList, taskCard.id]);
+
   return (
     <Draggable draggableId={taskCard.id} index={index}>
       {(provided) => (

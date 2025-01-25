@@ -1,8 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-export const TaskCardTitle = () => {
+export const TaskCardTitle = ({ cardId }) => {
   const [isClick, setIsClick] = useState(false);
-  const [inputCardTitle, setInputCardTitle] = useState("Today");
+  const [inputCardTitle, setInputCardTitle] = useState("");
+
+  // 初期タイトルをlocalStorageから読み込む
+  useEffect(() => {
+    const savedTitle = localStorage.getItem(`title-${cardId}`);
+    if (savedTitle) {
+      setInputCardTitle(savedTitle);
+    } else {
+      setInputCardTitle("New Card"); // デフォルトタイトル
+    }
+  }, [cardId]);
+
+  // タイトル変更時にlocalStorageに保存
+  const handleSaveTitle = (title) => {
+    localStorage.setItem(`title-${cardId}`, title);
+  };
 
   const handleClick = () => {
     setIsClick(true);
@@ -14,10 +29,12 @@ export const TaskCardTitle = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    handleSaveTitle(inputCardTitle);
     setIsClick(false);
   };
 
   const handleBlur = () => {
+    handleSaveTitle(inputCardTitle);
     setIsClick(false);
   };
 

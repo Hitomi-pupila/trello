@@ -1,26 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TaskCard } from "./TaskCard";
 import { AddTaskCardButton } from "./button/AddTaskCardButton";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
-const reorder = (taskCardsList, startIndex, endIndex) => {
-  //タスクを並び変える。
-  const remove = taskCardsList.splice(startIndex, 1); //[2,3]
-  taskCardsList.splice(endIndex, 0, remove[0]); //[2,1,3]
+const reorder = (list, startIndex, endIndex) => {
+  // 新しい配列を作成して並び替える
+  const result = Array.from(list);
+  const [removed] = result.splice(startIndex, 1);
+  result.splice(endIndex, 0, removed);
+  return result;
 };
 
 export const TaskCards = () => {
-  const [taskCardsList, setTaskCardsList] = useState([
-    {
-      id: "0",
-      draggableId: "item0",
-    },
-  ]);
+  const [taskCardsList, setTaskCardsList] = useState([]);
+
+  // コンポーネントの初回レンダリング時に localStorage からデータを読み込む
+  useEffect(() => {
+    const savedData = localStorage.getItem("taskCardsList");
+    if (savedData) {
+      setTaskCardsList(JSON.parse(savedData));
+    } else {
+      // 初期データを設定（必要なら変更）
+      setTaskCardsList([
+        {
+          id: "0",
+          draggableId: "item0",
+        },
+      ]);
+    }
+  }, []);
+
+  // taskCardsList が変更されるたびに localStorage に保存
+  useEffect(() => {
+    localStorage.setItem("taskCardsList", JSON.stringify(taskCardsList));
+  }, [taskCardsList]);
 
   const handleDragEnd = (result) => {
-    reorder(taskCardsList, result.source.index, result.destination.index);
+    if (!result.destination) return;
 
-    setTaskCardsList(taskCardsList);
+    const reorderedList = reorder(
+      taskCardsList,
+      result.source.index,
+      result.destination.index
+    );
+
+    setTaskCardsList(reorderedList);
   };
 
   return (
